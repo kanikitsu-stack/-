@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="920" viewBox="0 0 800 920">
+<rect width="800" height="920" fill="#6e7894"/>
+<circle cx="400" cy="330" r="170" fill="#d9d9df" opacity="0.85"/>
+<rect x="210" y="500" width="380" height="260" rx="160" fill="#d9d9df" opacity="0.85"/>
+<text x="400" y="850" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" fill="#ffffff" font-weight="700">IDOL 01</text>
+</svg>
