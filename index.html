@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0c0d12" />
+  <meta name="description" content="4人の中から一番好きな顔を選ぶK-POP FACE SORT" />
+  <title>K-POP FACE SORT</title>
+  <link rel="stylesheet" href="style.css?v=20260928-profile150-youtube2" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="start-screen" class="screen active">
+      <div class="hero-card">
+        <p class="eyebrow">K-POP FACE SORT</p>
+        <h1>4人の中から<br />いちばん好きな顔を選ぶ</h1>
+        <p class="lead">毎回4人から1人を選択。どの顔も好みでなければ「好きな顔がない」を選べます。</p>
+        <div class="start-meta">
+          <span id="idol-count">0人</span>
+          <span>4択式</span>
+          <span>予選 → 準決勝 → 決勝</span>
+          <span>TOP9表示</span>
+        </div>
+        <div class="hero-actions">
+          <button id="start-button" class="primary-button">START</button>
+          <button id="resume-button" class="secondary-button hidden">途中から再開</button>
+        </div>
+        <p class="microcopy">進行状況はこのブラウザに自動保存されます。</p>
+      </div>
+    </section>
+
+    <section id="sort-screen" class="screen">
+      <header class="sort-header">
+        <div>
+          <p id="phase-label" class="eyebrow">PRELIMINARY</p>
+          <h2>一番好きな顔を選んでください</h2>
+          <p id="phase-description" class="phase-description"></p>
+        </div>
+        <div class="progress-wrap" aria-label="進捗">
+          <div class="progress-text"><span id="progress-current">1</span> / <span id="progress-total">1</span></div>
+          <div class="progress-bar"><div id="progress-fill"></div></div>
+        </div>
+      </header>
+
+      <div id="candidate-grid" class="candidate-grid"></div>
+
+      <div class="none-wrap">
+        <button id="none-button" class="none-button">好きな顔がない</button>
+      </div>
+      <p class="save-note">選択するたびに自動保存されます</p>
+    </section>
+
+    <section id="transition-screen" class="screen">
+      <div class="hero-card compact-card">
+        <p id="transition-eyebrow" class="eyebrow">NEXT ROUND</p>
+        <h2 id="transition-title">準決勝へ</h2>
+        <p id="transition-copy" class="lead"></p>
+        <button id="transition-button" class="primary-button">次へ</button>
+      </div>
+    </section>
+
+    <section id="result-screen" class="screen">
+      <div class="result-header">
+        <p class="eyebrow">YOUR RESULT</p>
+        <h2>MY K-POP FACE TOP 9</h2>
+        <p>決勝・準決勝・予選の結果を段階別に反映したランキングです。</p>
+      </div>
+
+      <section id="winner-profile" class="winner-profile" aria-label="1位プロフィール"></section>
+
+      <div id="top9-grid" class="top9-grid"></div>
+
+      <div class="result-actions">
+        <button id="download-button" class="primary-button">TOP9画像を保存</button>
+        <button id="show-all-button" class="secondary-button">全順位を見る</button>
+        <button id="restart-button" class="secondary-button danger-button">もう一度やる</button>
+      </div>
+
+      <div id="all-ranking" class="all-ranking hidden"></div>
+      <canvas id="result-canvas" width="1080" height="1350" class="hidden" aria-hidden="true"></canvas>
+    </section>
+  </main>
+
+  <script src="data.js?v=20260928-profile150-youtube2"></script>
+  <script src="script.js?v=20260928-profile150-youtube2"></script>
+</body>
+</html>
