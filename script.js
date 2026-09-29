@@ -215,6 +215,7 @@ function showTransition(next, count) {
 }
 
 function renderCurrentGroup() {
+  updateBackButtons();
   if (state.currentIndex >= state.groups.length) {
     finishPhase();
     return;
@@ -293,6 +294,7 @@ function choose(winnerId) {
   if (winnerId) state.stats[winnerId][phase].wins += 1;
   state.currentIndex += 1;
   saveState();
+  updateBackButtons();
   renderCurrentGroup();
 }
 

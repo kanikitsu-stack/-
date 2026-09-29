@@ -657,7 +657,7 @@ body::after {
 }
 .profile-grid dt { color: var(--muted); }
 .profile-grid dd { color: var(--navy); }
-.winner-mv { padding: 0; margin-top: 18px; width: min(760px, 100%); }
+.winner-mv { padding: 0; margin: 18px auto 0; width: min(760px, 100%); }
 .winner-mv-head { margin-top: 16px; }
 .winner-mv-head h3 { color: var(--navy); }
 .youtube-link { border-color: var(--navy); color: var(--navy); }
