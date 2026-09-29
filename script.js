@@ -16,7 +16,8 @@ const state = {
   stats: {},
   qualified: { semi: [], final: [] },
   completed: false,
-  pendingTransition: null
+  pendingTransition: null,
+  history: []
 };
 
 const screens = {
@@ -29,6 +30,9 @@ const screens = {
 const els = {
   candidateGrid: document.getElementById('candidate-grid'),
   noneButton: document.getElementById('none-button'),
+  backButton: document.getElementById('back-button'),
+  transitionBackButton: document.getElementById('transition-back-button'),
+  resultBackButton: document.getElementById('result-back-button'),
   startButton: document.getElementById('start-button'),
   resumeButton: document.getElementById('resume-button'),
   restartButton: document.getElementById('restart-button'),
@@ -141,7 +145,8 @@ function startNew() {
     stats: freshStats(),
     qualified: { semi: [], final: [] },
     completed: false,
-    pendingTransition: null
+    pendingTransition: null,
+    history: []
   });
   saveState();
   showScreen('sort');
@@ -243,7 +248,41 @@ function renderCurrentGroup() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function snapshotState() {
+  return {
+    dataVersion: state.dataVersion,
+    phase: state.phase,
+    phaseParticipants: structuredClone(state.phaseParticipants),
+    groups: structuredClone(state.groups),
+    currentIndex: state.currentIndex,
+    stats: structuredClone(state.stats),
+    qualified: structuredClone(state.qualified),
+    completed: state.completed,
+    pendingTransition: state.pendingTransition
+  };
+}
+
+function undoLastChoice() {
+  if (!Array.isArray(state.history) || state.history.length === 0) return;
+  const previous = state.history.pop();
+  const history = state.history;
+  Object.assign(state, previous, { history });
+  saveState();
+  showScreen('sort');
+  renderCurrentGroup();
+}
+
+function updateBackButtons() {
+  const disabled = !Array.isArray(state.history) || state.history.length === 0;
+  [els.backButton, els.transitionBackButton, els.resultBackButton].filter(Boolean).forEach(btn => {
+    btn.disabled = disabled;
+    btn.classList.toggle('hidden', disabled);
+  });
+}
+
 function choose(winnerId) {
+  state.history = Array.isArray(state.history) ? state.history : [];
+  state.history.push(snapshotState());
   const ids = state.groups[state.currentIndex];
   const phase = state.phase;
   ids.forEach(id => {
@@ -415,6 +454,7 @@ function escapeHtml(value) {
 function showScreen(name) {
   Object.values(screens).forEach(s => s.classList.remove('active'));
   screens[name].classList.add('active');
+  updateBackButtons();
 }
 
 function saveState() {
@@ -436,6 +476,7 @@ function resume() {
   const saved = loadState();
   if (!saved) return startNew();
   Object.assign(state, saved);
+  state.history = Array.isArray(state.history) ? state.history : [];
   if (state.completed) return showResults();
   if (state.pendingTransition) return showTransition(state.pendingTransition, state.qualified[state.pendingTransition].length);
   showScreen('sort');
@@ -531,6 +572,9 @@ els.startButton.addEventListener('click', startNew);
 els.resumeButton.addEventListener('click', resume);
 els.restartButton.addEventListener('click', resetAll);
 els.noneButton.addEventListener('click', () => choose(null));
+els.backButton?.addEventListener('click', undoLastChoice);
+els.transitionBackButton?.addEventListener('click', undoLastChoice);
+els.resultBackButton?.addEventListener('click', undoLastChoice);
 els.transitionButton.addEventListener('click', beginPendingPhase);
 els.showAllButton.addEventListener('click', () => {
   const hidden = els.allRanking.classList.toggle('hidden');

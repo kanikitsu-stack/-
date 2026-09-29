@@ -715,3 +715,53 @@ body::after {
   .profile-grid > div { padding: 11px; }
   .winner-mv { margin-top: 22px; }
 }
+
+/* 2026-09-29 balance + undo refinements */
+.site-header {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  border-top: 8px solid var(--navy);
+  padding-left: max(22px, calc((100vw - 1500px) / 2 + 22px));
+  padding-right: max(22px, calc((100vw - 1500px) / 2 + 22px));
+}
+.site-nav { display: none !important; }
+
+/* Center the landing page and between-round messages. */
+.hero-card,
+.compact-card {
+  text-align: center;
+  padding-left: clamp(24px, 8vw, 110px);
+  padding-right: clamp(24px, 8vw, 110px);
+}
+.hero-card .lead { margin-left: auto; margin-right: auto; }
+.hero-actions,
+.start-meta { justify-content: center; margin-left: auto; margin-right: auto; }
+.compact-card { max-width: 850px; }
+.compact-card .lead { max-width: 700px; }
+.transition-actions { display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; }
+
+/* Keep every TOP9 portrait fully visible instead of cropping it. */
+.rank-photo-wrap,
+.rank-1 .rank-photo-wrap {
+  aspect-ratio: 1 / 1;
+  background: #fff;
+}
+.rank-photo,
+.rank-1 .rank-photo {
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #fff;
+}
+
+.none-wrap { gap: 12px; flex-wrap: wrap; }
+.back-button { min-width: 190px; }
+.back-button:disabled { opacity: .4; cursor: not-allowed; transform:none; }
+
+@media (max-width: 760px) {
+  .site-header { width:100%; padding-inline: 14px; }
+  .hero-card, .compact-card { padding-left: 16px; padding-right: 16px; }
+  .start-meta { justify-content: center; }
+  .none-wrap { flex-direction: column; align-items:center; }
+  .none-wrap .back-button, .none-wrap .none-button { width:min(330px,100%); }
+}

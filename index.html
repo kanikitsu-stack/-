@@ -7,14 +7,11 @@
   <meta name="description" content="4人の中から一番好きな顔を選ぶK-POP FACE SORT" />
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <title>K-POP FACE SORT</title>
-  <link rel="stylesheet" href="style.css?v=20260929-cream-grid-final" />
+  <link rel="stylesheet" href="style.css?v=20260929-balance-undo1" />
 </head>
 <body>
   <header class="site-header">
     <div class="site-brand">K-POP<br>FACE SORT</div>
-    <nav class="site-nav" aria-label="サイトナビゲーション">
-      <span>HOME</span><span>ABOUT</span><span>RESULT</span>
-    </nav>
   </header>
   <main class="app-shell">
     <section id="start-screen" class="screen active">
@@ -52,6 +49,7 @@
       <div id="candidate-grid" class="candidate-grid"></div>
 
       <div class="none-wrap">
+        <button id="back-button" class="secondary-button back-button">← 1つ前に戻る</button>
         <button id="none-button" class="none-button">好きな顔がない</button>
       </div>
       <p class="save-note">選択するたびに自動保存されます</p>
@@ -62,7 +60,7 @@
         <p id="transition-eyebrow" class="eyebrow">NEXT ROUND</p>
         <h2 id="transition-title">準決勝へ</h2>
         <p id="transition-copy" class="lead"></p>
-        <button id="transition-button" class="primary-button">次へ</button>
+        <div class="transition-actions"><button id="transition-back-button" class="secondary-button back-button">← 1つ前に戻る</button><button id="transition-button" class="primary-button">次へ</button></div>
       </div>
     </section>
 
@@ -80,6 +78,7 @@
       <div class="result-actions">
         <button id="download-button" class="primary-button">TOP9画像を保存</button>
         <button id="show-all-button" class="secondary-button">全順位を見る</button>
+        <button id="result-back-button" class="secondary-button back-button">← 最後の回答に戻る</button>
         <button id="restart-button" class="secondary-button danger-button">もう一度やる</button>
       </div>
 
@@ -88,7 +87,7 @@
     </section>
   </main>
 
-  <script src="data.js?v=20260929-cream-grid-final"></script>
-  <script src="script.js?v=20260929-cream-grid-final"></script>
+  <script src="data.js?v=20260929-balance-undo1"></script>
+  <script src="script.js?v=20260929-balance-undo1"></script>
 </body>
 </html>
