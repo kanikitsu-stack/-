@@ -195,3 +195,187 @@ h2 { font-size: clamp(25px, 3vw, 40px); margin-bottom: 8px; }
 .video-local-fallback img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .82; }
 .video-play-button { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -60%); display: grid; place-items: center; width: 68px; height: 48px; border-radius: 14px; background: rgba(0,0,0,.78); font-size: 23px; padding-left: 4px; }
 .video-local-note { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 9px 12px; border-radius: 12px; background: rgba(0,0,0,.72); font-size: 12px; font-weight: 700; text-align: center; }
+
+/* =========================================================
+   2026-09-29 redesign: sky blue / orange / yellow palette
+   Reference palette: #c4e9f2 #7fbbdd #f58b05 #ffc22f
+   ========================================================= */
+:root {
+  --bg: #f8fbfc;
+  --card: #ffffff;
+  --card-2: #eef8fb;
+  --text: #17324a;
+  --muted: #668092;
+  --line: #b9ddea;
+  --accent: #f58b05;
+  --danger: #d6654a;
+  --sky: #c4e9f2;
+  --blue: #7fbbdd;
+  --orange: #f58b05;
+  --yellow: #ffc22f;
+}
+
+html { color-scheme: light; }
+body {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(255,194,47,.30) 0 8%, transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(245,139,5,.18) 0 7%, transparent 26%),
+    linear-gradient(180deg, #c4e9f2 0 24%, #edf8fb 24% 42%, #fffaf0 42% 100%);
+  color: var(--text);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 10px;
+  background: linear-gradient(90deg, var(--orange) 0 34%, var(--yellow) 34% 68%, var(--blue) 68% 100%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hero-card,
+.candidate-card,
+.rank-card,
+.all-ranking,
+.winner-profile {
+  box-shadow: 0 16px 38px rgba(75, 122, 146, .13);
+}
+
+.hero-card {
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(127,187,221,.55);
+}
+
+.eyebrow { color: #e57d00; }
+.lead, .phase-description, .result-header p { color: var(--muted); }
+.microcopy, .save-note { color: #7891a0; }
+
+.start-meta span {
+  border-color: rgba(127,187,221,.65);
+  background: rgba(196,233,242,.34);
+  color: #365c73;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--orange), #ffa81f);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(245,139,5,.24);
+}
+.secondary-button {
+  background: rgba(255,255,255,.78);
+  border-color: var(--blue);
+  color: #315c77;
+}
+.none-button {
+  background: linear-gradient(135deg, #fff6d8, #fff0bd);
+  border-color: #f0c759;
+  color: #8a5a00;
+}
+
+.progress-bar { background: #d9edf4; }
+#progress-fill { background: linear-gradient(90deg, var(--blue), var(--orange), var(--yellow)); }
+
+.candidate-card {
+  background: rgba(255,255,255,.95);
+  border-color: rgba(127,187,221,.58);
+  color: var(--text);
+}
+.candidate-card:hover {
+  border-color: var(--orange);
+  box-shadow: 0 17px 36px rgba(245,139,5,.16);
+}
+.candidate-card:focus-visible { outline-color: var(--orange); }
+.candidate-photo-wrap { background: linear-gradient(160deg, #dff3f8, #9bcce5); }
+.candidate-group { color: #64859a; }
+
+/* TOP9: all nine cards use exactly the same grid footprint. */
+.top9-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.rank-card,
+.rank-1 {
+  grid-column: auto;
+  display: block;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(127,187,221,.62);
+  border-radius: 22px;
+  overflow: hidden;
+}
+.rank-card:nth-child(3n + 1) { border-top: 5px solid var(--orange); }
+.rank-card:nth-child(3n + 2) { border-top: 5px solid var(--blue); }
+.rank-card:nth-child(3n) { border-top: 5px solid var(--yellow); }
+.rank-1 { border-top-color: var(--orange) !important; }
+.rank-photo-wrap,
+.rank-1 .rank-photo-wrap {
+  aspect-ratio: 1 / 1.06;
+  background: linear-gradient(155deg, #def2f8, #a6d1e7);
+}
+.rank-body,
+.rank-1 .rank-body {
+  padding: 15px;
+}
+.rank-name,
+.rank-1 .rank-name {
+  font-size: 21px;
+  color: #18384e;
+}
+.rank-group, .rank-stats { color: #67879a; }
+.rank-num {
+  background: rgba(255,255,255,.94);
+  color: #d66f00;
+  border: 2px solid rgba(245,139,5,.78);
+  box-shadow: 0 5px 14px rgba(32,82,106,.15);
+}
+.rank-1 .rank-num {
+  background: var(--orange);
+  color: #fff;
+  border-color: #fff2d2;
+}
+
+.all-ranking { border-color: rgba(127,187,221,.62); }
+.all-row {
+  background: rgba(255,255,255,.96);
+  border-bottom-color: #d9edf4;
+}
+.all-row small { color: var(--muted); }
+
+/* No.1 profile stays a dedicated profile area below/above the equal TOP9 grid. */
+.winner-profile {
+  border-color: rgba(127,187,221,.65);
+  background:
+    linear-gradient(135deg, rgba(196,233,242,.72), rgba(255,255,255,.98) 43%, rgba(255,236,176,.52));
+}
+.winner-kicker { color: #d87400; }
+.winner-photo-wrap { background: #d9eef5; }
+.winner-copy h2 { color: #173b52; }
+.winner-affiliation { color: #62839a; }
+.winner-rank {
+  background: linear-gradient(135deg, var(--orange), var(--yellow));
+  color: #fff;
+}
+.profile-grid > div {
+  border-color: rgba(127,187,221,.55);
+  background: rgba(255,255,255,.63);
+}
+.profile-grid dt { color: #66899e; }
+.profile-grid dd { color: #244a61; }
+.youtube-link {
+  color: #27627f;
+  background: rgba(255,255,255,.76);
+  border-color: var(--blue);
+}
+
+@media (max-width: 760px) {
+  .top9-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .rank-1 { grid-column: auto; display: block; }
+  .rank-1 .rank-photo-wrap { aspect-ratio: 1 / 1.06; }
+  .rank-1 .rank-body { padding: 10px; }
+  .rank-body { padding: 10px; }
+  .rank-name, .rank-1 .rank-name { font-size: 13px; line-height: 1.18; }
+  .rank-group { font-size: 9px; }
+  .rank-stats { font-size: 8px; margin-top: 6px; }
+  .rank-num { top: 7px; left: 7px; padding: 4px 7px; font-size: 10px; }
+}

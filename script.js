@@ -476,14 +476,14 @@ async function downloadTop9Image() {
   const ids = getFinalRankingIds().slice(0, 9);
   const canvas = els.resultCanvas;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#0c0d12';
+  ctx.fillStyle = '#f8fbfc';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = '#17324a';
   ctx.textAlign = 'center';
   ctx.font = '700 30px sans-serif';
   ctx.fillText('MY K-POP FACE TOP 9', 540, 70);
   ctx.font = '400 18px sans-serif';
-  ctx.fillStyle = '#aeb3c2';
+  ctx.fillStyle = '#668092';
   ctx.fillText('K-POP FACE SORT', 540, 104);
 
   const gap = 18;
@@ -498,13 +498,13 @@ async function downloadTop9Image() {
     const row = Math.floor(i / 3);
     const x = startX + col * (cardW + gap);
     const y = startY + row * (cardH + gap);
-    ctx.fillStyle = '#181a21';
+    ctx.fillStyle = '#ffffff';
     ctx.fillRect(x, y, cardW, cardH);
     try {
       const img = await loadImage(idol.image);
       drawCover(ctx, img, x, y, cardW, 250);
     } catch {
-      ctx.fillStyle = '#2a2e39';
+      ctx.fillStyle = '#c4e9f2';
       ctx.fillRect(x, y, cardW, 250);
     }
     ctx.fillStyle = 'rgba(0,0,0,.78)';
@@ -517,7 +517,7 @@ async function downloadTop9Image() {
     ctx.font = '700 24px sans-serif';
     ctx.fillText(idol.name, x + 18, y + 292, cardW - 36);
     ctx.font = '400 16px sans-serif';
-    ctx.fillStyle = '#aeb3c2';
+    ctx.fillStyle = '#668092';
     ctx.fillText(idol.group, x + 18, y + 322, cardW - 36);
   }
 
